@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
+#define TIMEOUT 1*1000
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -13,10 +14,17 @@ class Widget : public QWidget
 
 public:
     Widget(QWidget *parent = nullptr);
+    virtual void timerEvent(QTimerEvent *event);
     ~Widget();
+
+private slots:
+    void on_start_btn_clicked();
+
+    void on_stop_btn_clicked();
 
 private:
     Ui::Widget *ui;
-    QString expression;
+    int myTimerId;
+    int picId;
 };
 #endif // WIDGET_H

@@ -2,6 +2,9 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QTimer>
+
+#define TIMEOUT 1*1000
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -15,8 +18,14 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
+private slots:
+    void on_pushButton_clicked();
+    void showPIC();
+    void on_pushButton_2_clicked();
+
 private:
     Ui::Widget *ui;
-    QString expression;
+    QTimer *timer;
+    int picID;
 };
 #endif // WIDGET_H
