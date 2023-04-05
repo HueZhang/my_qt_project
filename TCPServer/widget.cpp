@@ -29,13 +29,17 @@ void Widget::newClientHandle()
     ui->lineEdit_2->setText(QString::number(socket->peerPort()));// 获取端口号
 
     // 服务端收到客户端发送的消息
-    connect(socket,&QTcpSocket::readyRead,this,&Widget::clientInfo);
+    //connect(socket,&QTcpSocket::readyRead,this,&Widget::clientInfo);
+
+    // 启用多线程
+    MyThread *thread = new MyThread(socket);
+    thread->start();
 }
 
-void Widget::clientInfo()
-{
-    // 获取信号的发出者
-    QTcpSocket *s = (QTcpSocket *)sender();
+//void Widget::clientInfo()
+//{
+//    // 获取信号的发出者
+//    QTcpSocket *s = (QTcpSocket *)sender();
 
-    ui->msg_edit->setText(QString( s->readAll()));
-}
+//    ui->msg_edit->setText(QString( s->readAll()));
+//}
